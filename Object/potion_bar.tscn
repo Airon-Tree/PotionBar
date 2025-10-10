@@ -1,0 +1,167 @@
+[gd_scene load_steps=13 format=3 uid="uid://bbj6qmh87eu20"]
+
+[ext_resource type="Script" uid="uid://d0g6slp01wua7" path="res://Script/PotionBar.gd" id="1_4mpp1"]
+[ext_resource type="PackedScene" uid="uid://cyi4evvt8xr62" path="res://Object/material_button.tscn" id="2_e223l"]
+[ext_resource type="Texture2D" uid="uid://bt5xfu6yg1gey" path="res://Art/HealthPotion.png" id="2_kous2"]
+[ext_resource type="Texture2D" uid="uid://b6tcgjhqohtnn" path="res://Art/failedpotion.png" id="3_aq264"]
+[ext_resource type="Texture2D" uid="uid://b581d85dg45mv" path="res://Art/Grind.png" id="3_kous2"]
+[ext_resource type="Texture2D" uid="uid://c38lvshg8f1qj" path="res://Art/comfrey-alchemy-item-kcd2-wiki-guide.png" id="3_s6cs1"]
+[ext_resource type="Texture2D" uid="uid://dptrbe2a7qxmi" path="res://Art/poppy-alchemy-item-kcd2-wiki-guide.png" id="4_q54sr"]
+[ext_resource type="Texture2D" uid="uid://0ypk3svn4oth" path="res://Art/Distill.png" id="5_aq264"]
+[ext_resource type="Texture2D" uid="uid://bsh5lwkjntf8g" path="res://Art/sage-alchemy-item-kcd2-wiki-guide.png" id="5_gthn2"]
+[ext_resource type="Texture2D" uid="uid://i1rp8ellm0x8" path="res://Art/valerian-alchemy-item-kcd2-wiki-guide.png" id="6_kous2"]
+[ext_resource type="Texture2D" uid="uid://buctoiqc4k2a" path="res://Art/wormwood-alchemy-item-kcd2-wiki-guide.png" id="7_aq264"]
+[ext_resource type="Texture2D" uid="uid://c4ljlvbh33hpk" path="res://Art/Pot.png" id="10_q54sr"]
+
+[node name="PotionBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_4mpp1")
+tex_health_potion = ExtResource("2_kous2")
+tex_failed_potion = ExtResource("3_aq264")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 169.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Mini Potion Bar"
+horizontal_alignment = 1
+
+[node name="FormulaPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(320, 128)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/FormulaPanel"]
+layout_mode = 2
+
+[node name="FormulaList" type="RichTextLabel" parent="MarginContainer/VBoxContainer/FormulaPanel/ScrollContainer"]
+custom_minimum_size = Vector2(550, 128)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/line_separation = 4
+bbcode_enabled = true
+fit_content = true
+
+[node name="BaseBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 48
+
+[node name="Base_Water" type="Button" parent="MarginContainer/VBoxContainer/BaseBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "Water"
+
+[node name="Base_Oil" type="Button" parent="MarginContainer/VBoxContainer/BaseBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "Oil"
+
+[node name="Base_Wine" type="Button" parent="MarginContainer/VBoxContainer/BaseBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "Wine"
+
+[node name="ProcessBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 60
+
+[node name="GrindButton" type="Button" parent="MarginContainer/VBoxContainer/ProcessBar"]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("3_kous2")
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/ProcessBar/GrindButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_kous2")
+stretch_mode = 5
+
+[node name="DistillButton" type="Button" parent="MarginContainer/VBoxContainer/ProcessBar"]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("5_aq264")
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/ProcessBar/DistillButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_aq264")
+stretch_mode = 5
+
+[node name="MaterialsBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="Comfrey" parent="MarginContainer/VBoxContainer/MaterialsBar" instance=ExtResource("2_e223l")]
+layout_mode = 2
+icon = ExtResource("3_s6cs1")
+material_name = "Confrey"
+
+[node name="Poppy" parent="MarginContainer/VBoxContainer/MaterialsBar" instance=ExtResource("2_e223l")]
+layout_mode = 2
+icon = ExtResource("4_q54sr")
+material_name = "Poppy"
+
+[node name="Sage" parent="MarginContainer/VBoxContainer/MaterialsBar" instance=ExtResource("2_e223l")]
+layout_mode = 2
+icon = ExtResource("5_gthn2")
+material_name = "Sage"
+
+[node name="Valerian" parent="MarginContainer/VBoxContainer/MaterialsBar" instance=ExtResource("2_e223l")]
+layout_mode = 2
+icon = ExtResource("6_kous2")
+material_name = "Valerian"
+
+[node name="Warmwood" parent="MarginContainer/VBoxContainer/MaterialsBar" instance=ExtResource("2_e223l")]
+layout_mode = 2
+icon = ExtResource("7_aq264")
+material_name = "Warmwood"
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PotButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+text = "Put In Pot"
+icon = ExtResource("10_q54sr")
+
+[node name="ActionBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MakeButton" type="Button" parent="MarginContainer/VBoxContainer/ActionBar"]
+layout_mode = 2
+text = "Make"
+
+[node name="ClearButton" type="Button" parent="MarginContainer/VBoxContainer/ActionBar"]
+layout_mode = 2
+text = "Clear"
+
+[node name="PotionsShelf" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Log" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+fit_content = true
