@@ -26,5 +26,3 @@ func set_selected(on: bool) -> void:
 
 func _pressed() -> void:
 	emit_signal("material_chosen", material_name)
-	
-	

@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7d67ruwk3dle"]
+
+[ext_resource type="Script" uid="uid://pbau4clwxyso" path="res://Script/customer.gd" id="1_2bhhp"]
+[ext_resource type="Texture2D" uid="uid://biedd1f1qvq3j" path="res://Art/customer1.png" id="1_5g0ex"]
+
+[node name="Customer" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_2bhhp")
+
+[node name="Date" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 56.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 32
+text = "Date"
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 10.0
+offset_right = 235.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 32
+text = "Score"
+
+[node name="Portrait" type="TextureRect" parent="."]
+layout_mode = 1
+offset_top = -69.99999
+offset_right = 2894.0
+offset_bottom = 5251.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_5g0ex")
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 426.0
+offset_right = 560.0
+offset_bottom = 460.0
+theme_override_font_sizes/font_size = 24
+text = "Name"
+
+[node name="Dialogue" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(550, 128)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 460.0
+offset_right = 560.0
+offset_bottom = 710.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Dialogue"]
+layout_mode = 2
+
+[node name="DialogText" type="RichTextLabel" parent="Dialogue/ScrollContainer"]
+custom_minimum_size = Vector2(550, 250)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/line_separation = 4
+bbcode_enabled = true
+fit_content = true
