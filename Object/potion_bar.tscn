@@ -22,11 +22,12 @@ tex_failed_potion = ExtResource("3_aq264")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_right = 120.0
-offset_bottom = 169.0
+offset_right = 600.0
+offset_bottom = 619.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -35,14 +36,14 @@ text = "Mini Potion Bar"
 horizontal_alignment = 1
 
 [node name="FormulaPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(320, 128)
+custom_minimum_size = Vector2(550, 90)
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/FormulaPanel"]
 layout_mode = 2
 
 [node name="FormulaList" type="RichTextLabel" parent="MarginContainer/VBoxContainer/FormulaPanel/ScrollContainer"]
-custom_minimum_size = Vector2(550, 128)
+custom_minimum_size = Vector2(600, 90)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_constants/line_separation = 4
@@ -157,8 +158,12 @@ text = "Make"
 layout_mode = 2
 text = "Clear"
 
+[node name="OfferButton" type="Button" parent="MarginContainer/VBoxContainer/ActionBar"]
+layout_mode = 2
+text = "Offer"
+
 [node name="PotionsShelf" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 72)
+custom_minimum_size = Vector2(0, 65)
 layout_mode = 2
 size_flags_horizontal = 4
 

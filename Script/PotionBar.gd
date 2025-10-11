@@ -3,13 +3,17 @@ extends Control
 var counts: Dictionary = {}
 var selected: String = ""
 var pot_list: Array[String] = []
+var green_stylebox: StyleBoxFlat
+
+signal potion_made(potion_name: String)
 
 @onready var materials_bar := $MarginContainer/VBoxContainer/MaterialsBar
 @onready var material_buttons := materials_bar.get_children()
 @onready var pot_button := $MarginContainer/VBoxContainer/CenterContainer/PotButton
 @onready var make_button := $MarginContainer/VBoxContainer/ActionBar/MakeButton
 @onready var clear_button := $MarginContainer/VBoxContainer/ActionBar/ClearButton
-@onready var log := $MarginContainer/VBoxContainer/Log
+@onready var offer_button := $MarginContainer/VBoxContainer/ActionBar/OfferButton
+@onready var log_view := $MarginContainer/VBoxContainer/Log
 
 # Bases & Process buttons
 @onready var base_bar := $MarginContainer/VBoxContainer/BaseBar
@@ -39,8 +43,6 @@ var RECIPES: Array = [
 	# Add more recipes here later...
 ]
 
-
-
 var base_selected: String = ""
 var do_grind: bool = false
 var do_distill: bool = false
@@ -56,9 +58,10 @@ func _ready() -> void:
 	pot_button.pressed.connect(_on_pot_pressed)
 	make_button.pressed.connect(_on_make_pressed)
 	clear_button.pressed.connect(_on_clear_pressed)
-
-
+	offer_button.pressed.connect(_on_offer_pressed)
 	
+	green_stylebox = _make_green_box()
+
 	# Bases
 	base_btn_water.toggle_mode = true
 	base_btn_oil.toggle_mode   = true
@@ -84,6 +87,8 @@ func _ready() -> void:
 			r["texture"] = tex_health_potion
 			
 	_refresh_formula_list()
+	_refresh_highlight_from_state()
+	call_deferred("_refresh_highlight_from_state")
 	
 	_log_intro()
 
@@ -129,29 +134,32 @@ func _on_base_pressed(which: String) -> void:
 	_highlight_button(base_btn_oil,   which == "Oil")
 	_highlight_button(base_btn_wine,  which == "Wine")
 	_update_mix_line()
+	_refresh_highlight_from_state()
 
 func _on_grind_toggled() -> void:
 	do_grind = grind_button.button_pressed
 	_highlight_button(grind_button, do_grind)
 	_update_mix_line()
+	_refresh_highlight_from_state()
 
 func _on_distill_toggled() -> void:
 	do_distill = distill_button.button_pressed
 	_highlight_button(distill_button, do_distill)
 	_update_mix_line()
+	_refresh_highlight_from_state()
 
 func _highlight_button(btn: Button, on: bool) -> void:
 	# brighter when selected
 	btn.modulate = Color(1,1,1,1) if on else Color(0.9,0.9,0.9,1)
 
-func _on_material_chosen(name: String) -> void:
-	selected = name
+func _on_material_chosen(mat_name: String) -> void:
+	selected = mat_name
 	for mb in material_buttons:
-		mb.set_selected(mb.material_name == name)
+		mb.set_selected(mb.material_name == mat_name)
 
 func _on_pot_pressed() -> void:
 	if selected == "":
-		log.append_text("[i]Select a material first, then click the pot.[/i]\n")
+		log_view.append_text("[i]Select a material first, then click the pot.[/i]\n")
 		return
 	counts[selected] += 1
 	pot_list.append(selected)
@@ -190,18 +198,18 @@ func _on_make_pressed() -> void:
 	# Log the result
 	var line := "Result: [b]%s[/b]  |  Base: %s  |  Process: %s  |  Materials: %s" % [result_name, base_str, process_str, summary]
 	print(line)
-	log.append_text(line + "\n")
+	log_view.append_text(line + "\n")
 	
 	# Show the potion on the shelf (texture)
 	_add_potion_to_shelf(result_tex, result_name)
 
-func _add_potion_to_shelf(tex: Texture2D, name: String) -> void:
+func _add_potion_to_shelf(tex: Texture2D, potion_name: String) -> void:
 	var t := TextureRect.new()
 	t.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	t.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	t.custom_minimum_size = Vector2(64, 64)
 	t.texture = tex
-	t.tooltip_text = name
+	t.tooltip_text = potion_name
 	potions_shelf.add_child(t)
 
 func _on_clear_pressed() -> void:
@@ -216,7 +224,7 @@ func _on_clear_pressed() -> void:
 		mb.set_count(0)
 		mb.set_selected(false)
 		
-		# reset base & process
+	# reset base & process
 	base_selected = ""
 	base_btn_water.set_pressed_no_signal(false)
 	base_btn_oil.set_pressed_no_signal(false)
@@ -232,14 +240,36 @@ func _on_clear_pressed() -> void:
 	_highlight_button(grind_button, false)
 	_highlight_button(distill_button, false)
 
-	log.text = ""
+	log_view.text = ""
 	_log_intro()
 	
 	for c in potions_shelf.get_children():
 		c.queue_free()
+	
+	_refresh_highlight_from_state()
+
+func _on_offer_pressed() -> void:
+	var count := potions_shelf.get_child_count()
+	if count <= 0:
+		log_view.append_text("[i]No potion to offer. Make one first.[/i]\n")
+		return
+
+	var last := potions_shelf.get_child(count - 1)
+	var offered_name := ""
+	if last is TextureRect:
+		offered_name = (last as TextureRect).tooltip_text
+
+	if offered_name == "":
+		log_view.append_text("[i]The last potion has no name. Make again.[/i]\n")
+		return
+
+	emit_signal("potion_made", offered_name)
+	log_view.append_text("[b]Offered:[/b] %s\n" % offered_name)
+
+	_on_clear_pressed()
 
 func _log_intro() -> void:
-	log.append_text("[i]Ready. Click a material to select it, then click the POT to add one unit. Press Make to print, Clear to reset.[/i]\n")
+	log_view.append_text("[i]Ready. Click a material to select it, then click the POT to add one unit. Press Make to print, Clear to reset.[/i]\n")
 
 func _update_mix_line() -> void:
 	var parts: Array[String] = []
@@ -247,13 +277,13 @@ func _update_mix_line() -> void:
 		if counts[k] > 0:
 			parts.append("%s×%d" % [k, counts[k]])
 	var summary := ", ".join(parts) if parts.size() > 0 else "empty"
-	var base_str := base_selected if base_selected != "" else "no base"
+	var _base_str := base_selected if base_selected != "" else "no base"
 	var proc_parts: Array[String] = []
 	if do_grind: proc_parts.append("grinded")
 	if do_distill: proc_parts.append("distilled")
-	var process_str := ", ".join(proc_parts) if proc_parts.size() > 0 else "no processing"
+	var _process_str := ", ".join(proc_parts) if proc_parts.size() > 0 else "no processing"
 	
-	log.text = "Current mix: " + summary + "\n"
+	log_view.text = "Current mix: " + summary + "\n"
 	
 func _clean_counts_dict(src: Dictionary) -> Dictionary:
 	# returns a new dictionary with only >0 entries
@@ -287,3 +317,55 @@ func _match_recipe() -> Dictionary:
 		if _materials_equal(mat_now, r["materials"]):
 			return r
 	return {}  # no match
+
+func _set_sides(sb: StyleBoxFlat, prop_prefix: String, v: float) -> void:
+	for side in ["left", "top", "right", "bottom"]:
+		sb.set("%s_%s" % [prop_prefix, side], v)
+
+func _set_corners(sb: StyleBoxFlat, radius: float) -> void:
+	for corner in ["top_left", "top_right", "bottom_left", "bottom_right"]:
+		sb.set("corner_radius_%s" % corner, radius)
+
+func _make_green_box() -> StyleBoxFlat:
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(0, 0, 0, 0)
+	sb.border_color = Color(0.2, 0.85, 0.2)
+	var w := 3
+
+	_set_sides(sb, "border_width", w)
+	_set_sides(sb, "expand_margin", w)
+	_set_sides(sb, "content_margin", w)
+	_set_corners(sb, 6)
+
+	return sb
+
+func _apply_green_border(btn: Button) -> void:
+	if green_stylebox == null:
+		green_stylebox = _make_green_box()
+	for s in ["normal", "hover", "pressed", "focus", "disabled"]:
+		btn.add_theme_stylebox_override(s, green_stylebox)
+
+func _clear_green_border(btn: Button) -> void:
+	for s in ["normal", "hover", "pressed", "focus", "disabled"]:
+		btn.remove_theme_stylebox_override(s)
+
+func _refresh_highlight_from_state() -> void:
+	_clear_green_border(base_btn_water)
+	_clear_green_border(base_btn_oil)
+	_clear_green_border(base_btn_wine)
+	if base_selected == "Water":
+		_apply_green_border(base_btn_water)
+	elif base_selected == "Oil":
+		_apply_green_border(base_btn_oil)
+	elif base_selected == "Wine":
+		_apply_green_border(base_btn_wine)
+
+	if do_grind:
+		_apply_green_border(grind_button)
+	else:
+		_clear_green_border(grind_button)
+
+	if do_distill:
+		_apply_green_border(distill_button)
+	else:
+		_clear_green_border(distill_button)
