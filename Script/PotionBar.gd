@@ -27,6 +27,12 @@ signal potion_made(potion_name: String)
 
 # Potion result
 @export var tex_health_potion: Texture2D
+@export var tex_energy_potion: Texture2D
+@export var tex_strong_potion: Texture2D
+@export var tex_cure_potion: Texture2D
+@export var tex_posion: Texture2D
+@export var tex_flu_potion: Texture2D
+@export var tex_refresh_potion: Texture2D
 @export var tex_failed_potion: Texture2D
 @onready var formula_list := $MarginContainer/VBoxContainer/FormulaPanel/ScrollContainer/FormulaList
 @onready var potions_shelf := $MarginContainer/VBoxContainer/PotionsShelf
@@ -41,6 +47,59 @@ var RECIPES: Array = [
 		"texture": null  # filled in _ready from tex_health_potion
 	},
 	# Add more recipes here later...
+	{
+		"name": "Strong Potion",
+		"base": "Oil",
+		"grind": true,
+		"distill": true,
+		"materials": { "Sage": 1, "Warmwood": 2 },
+		"texture": null
+	},
+	
+	{
+		"name": "Energy Potion",
+		"base": "Wine",
+		"grind": true,
+		"distill": false,
+		"materials": { "Comfrey": 1, "Poppy": 1, "Warmwood": 2 },
+		"texture": null
+	},
+	
+	{
+		"name": "Cure Potion",
+		"base": "Water",
+		"grind": false,
+		"distill": false,
+		"materials": { "Sage": 1, "Valerian": 1, "Warmwood": 1 },
+		"texture": null
+	},
+	
+	{
+		"name": "Posion",
+		"base": "Wine",
+		"grind": true,
+		"distill": true,
+		"materials": { "Comfrey": 2, "Poppy": 2 },
+		"texture": null
+	},
+	
+	{
+		"name": "Flu Potion",
+		"base": "Oil",
+		"grind": true,
+		"distill": false,
+		"materials": { "Comfrey": 1, "Poppy": 1, "Sage": 1, "Warmwood": 1 },
+		"texture": null
+	},
+	
+	{
+		"name": "Refresh Potion",
+		"base": "Water",
+		"grind": true,
+		"distill": true,
+		"materials": { "Comfrey": 1, "Poppy": 1, "Sage": 1 },
+		"texture": null
+	},
 ]
 
 var base_selected: String = ""
@@ -85,6 +144,19 @@ func _ready() -> void:
 	for r in RECIPES:
 		if r["name"] == "Health Potion":
 			r["texture"] = tex_health_potion
+		if r["name"] == "Energy Potion":
+			r["texture"] = tex_energy_potion
+		if r["name"] == "Strong Potion":
+			r["texture"] = tex_strong_potion
+		if r["name"] == "Posion":
+			r["texture"] = tex_posion
+		if r["name"] == "Cure Potion":
+			r["texture"] = tex_cure_potion	
+		if r["name"] == "Flu Potion":
+			r["texture"] = tex_flu_potion
+		if r["name"] == "Refresh Potion":
+			r["texture"] = tex_refresh_potion
+		
 			
 	_refresh_formula_list()
 	_refresh_highlight_from_state()

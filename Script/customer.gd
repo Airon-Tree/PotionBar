@@ -13,7 +13,7 @@ signal finished_day(day: int)
 # Customer info (make sure the image paths exist)
 const CUSTOMER_INFOS = [
 	{"name": "Customer1", "tex": preload("res://Art/customer1.png")},
-	{"name": "Customer2", "tex": preload("res://Art/customer2.png")},
+	{"name": "Customer2", "tex": preload("res://Art/Custumer2-resize.png")},
 	{"name": "Customer3", "tex": preload("res://Art/customer3.png")},
 ]
 
@@ -28,10 +28,10 @@ var DIALOG_BANK: Dictionary = {
 			}
 		},
 		1: {
-			"before": ["before1", "before2", "before3"],
+			"before": ["Talking1-1", "Talking2-1", "Request-1"],
 			"after": {
-				"after1": ["after1-1", "after1-2", "after1-3"],
-				"after2": ["after2-1", "after2-2", "after2-3"]
+				"after1": ["?", "after1-2", "after1-3"],
+				"after2": ["Good Health Potion", "Thank you", "after2-3"]
 			}
 		},
 		2: {
@@ -44,14 +44,14 @@ var DIALOG_BANK: Dictionary = {
 	},
 	2: {
 		0: {
-			"before": ["before1", "before2", "before3"],
+			"before": ["Talking1", "Talking2", "Request"],
 			"after": {
 				"after1": ["after1-1", "after1-2", "after1-3"],
 				"after2": ["after2-1", "after2-2", "after2-3"]
 			}
 		},
 		1: {
-			"before": ["before1", "before2", "before3"],
+			"before": ["Talking1-1", "Talking2-1", "Request-1"],
 			"after": {
 				"after1": ["after1-1", "after1-2", "after1-3"],
 				"after2": ["after2-1", "after2-2", "after2-3"]

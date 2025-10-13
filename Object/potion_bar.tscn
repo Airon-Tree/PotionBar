@@ -1,16 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbj6qmh87eu20"]
+[gd_scene load_steps=19 format=3 uid="uid://bbj6qmh87eu20"]
 
 [ext_resource type="Script" uid="uid://d0g6slp01wua7" path="res://Script/PotionBar.gd" id="1_4mpp1"]
 [ext_resource type="PackedScene" uid="uid://cyi4evvt8xr62" path="res://Object/material_button.tscn" id="2_e223l"]
 [ext_resource type="Texture2D" uid="uid://bt5xfu6yg1gey" path="res://Art/HealthPotion.png" id="2_kous2"]
+[ext_resource type="Texture2D" uid="uid://ckpwyv027kdr" path="res://Art/Energy_Potion.png" id="3_0efpo"]
 [ext_resource type="Texture2D" uid="uid://b6tcgjhqohtnn" path="res://Art/failedpotion.png" id="3_aq264"]
 [ext_resource type="Texture2D" uid="uid://b581d85dg45mv" path="res://Art/Grind.png" id="3_kous2"]
 [ext_resource type="Texture2D" uid="uid://c38lvshg8f1qj" path="res://Art/comfrey-alchemy-item-kcd2-wiki-guide.png" id="3_s6cs1"]
 [ext_resource type="Texture2D" uid="uid://dptrbe2a7qxmi" path="res://Art/poppy-alchemy-item-kcd2-wiki-guide.png" id="4_q54sr"]
+[ext_resource type="Texture2D" uid="uid://kyd6fcr14ha3" path="res://Art/Strong_Potion.png" id="4_tkowj"]
+[ext_resource type="Texture2D" uid="uid://bjey4gwhuqode" path="res://Art/Cure_Potion.png" id="5_7i453"]
 [ext_resource type="Texture2D" uid="uid://0ypk3svn4oth" path="res://Art/Distill.png" id="5_aq264"]
 [ext_resource type="Texture2D" uid="uid://bsh5lwkjntf8g" path="res://Art/sage-alchemy-item-kcd2-wiki-guide.png" id="5_gthn2"]
+[ext_resource type="Texture2D" uid="uid://c1lxxx7uwudfn" path="res://Art/Posion.png" id="6_4mn1y"]
 [ext_resource type="Texture2D" uid="uid://i1rp8ellm0x8" path="res://Art/valerian-alchemy-item-kcd2-wiki-guide.png" id="6_kous2"]
 [ext_resource type="Texture2D" uid="uid://buctoiqc4k2a" path="res://Art/wormwood-alchemy-item-kcd2-wiki-guide.png" id="7_aq264"]
+[ext_resource type="Texture2D" uid="uid://bi6n63wi7113h" path="res://Art/Flu_Potion.png" id="7_uo3af"]
+[ext_resource type="Texture2D" uid="uid://boh83x7n33pqf" path="res://Art/Refresh_Potion.png" id="8_sjd1r"]
 [ext_resource type="Texture2D" uid="uid://c4ljlvbh33hpk" path="res://Art/Pot.png" id="10_q54sr"]
 
 [node name="PotionBar" type="Control"]
@@ -18,6 +24,12 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_4mpp1")
 tex_health_potion = ExtResource("2_kous2")
+tex_energy_potion = ExtResource("3_0efpo")
+tex_strong_potion = ExtResource("4_tkowj")
+tex_cure_potion = ExtResource("5_7i453")
+tex_posion = ExtResource("6_4mn1y")
+tex_flu_potion = ExtResource("7_uo3af")
+tex_refresh_potion = ExtResource("8_sjd1r")
 tex_failed_potion = ExtResource("3_aq264")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -116,7 +128,7 @@ alignment = 1
 [node name="Comfrey" parent="MarginContainer/VBoxContainer/MaterialsBar" instance=ExtResource("2_e223l")]
 layout_mode = 2
 icon = ExtResource("3_s6cs1")
-material_name = "Confrey"
+material_name = "Comfrey"
 
 [node name="Poppy" parent="MarginContainer/VBoxContainer/MaterialsBar" instance=ExtResource("2_e223l")]
 layout_mode = 2
