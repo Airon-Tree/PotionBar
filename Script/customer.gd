@@ -10,58 +10,65 @@ signal finished_day(day: int)
 @onready var dialog_text: RichTextLabel = $Dialogue/ScrollContainer/DialogText
 @onready var scroll_container: ScrollContainer = $Dialogue/ScrollContainer
 
-# Customer info (make sure the image paths exist)
 const CUSTOMER_INFOS = [
 	{"name": "Customer1", "tex": preload("res://Art/customer1.png")},
-	{"name": "Customer2", "tex": preload("res://Art/Custumer2-resize.png")},
+	{"name": "Customer2", "tex": preload("res://Art/customer2.png")},
 	{"name": "Customer3", "tex": preload("res://Art/customer3.png")},
 ]
 
-# Dialogue structure: DIALOG_BANK[day][customer] = {"before": [...], "after": {"after1": [...], "after2": [...]} }
 var DIALOG_BANK: Dictionary = {
 	1: {
 		0: {
 			"before": ["before1", "before2", "before3"],
+			"before_special": ["You've heard about the market gossip, right?", "Maybe that will help."],
 			"after": {
 				"after1": ["after1-1", "after1-2", "after1-3"],
-				"after2": ["after2-1", "after2-2", "after2-3"]
+				"after2": ["after2-1", "after2-2", "after2-3"],
+				"special": ["special1", "special2", "special3"]
 			}
 		},
 		1: {
-			"before": ["Talking1-1", "Talking2-1", "Request-1"],
+			"before": ["before1", "before2", "before3"],
+			"before_special": ["They asked about the alchemist yesterday..."],
 			"after": {
-				"after1": ["?", "after1-2", "after1-3"],
-				"after2": ["Good Health Potion", "Thank you", "after2-3"]
+				"after1": ["after1-1", "after1-2", "after1-3"],
+				"after2": ["after2-1", "after2-2", "after2-3"],
+				"special": ["special1", "special2", "special3"]
 			}
 		},
 		2: {
 			"before": ["before1", "before2", "before3"],
 			"after": {
 				"after1": ["after1-1", "after1-2", "after1-3"],
-				"after2": ["after2-1", "after2-2", "after2-3"]
+				"after2": ["after2-1", "after2-2", "after2-3"],
+				"special": ["special1", "special2", "special3"]
 			}
 		}
 	},
 	2: {
 		0: {
-			"before": ["Talking1", "Talking2", "Request"],
+			"before": ["before1", "before2", "before3"],
+			"before_special": ["I may tell you more if you know how to please me."],
 			"after": {
 				"after1": ["after1-1", "after1-2", "after1-3"],
-				"after2": ["after2-1", "after2-2", "after2-3"]
+				"after2": ["after2-1", "after2-2", "after2-3"],
+				"special": ["special1", "special2", "special3"]
 			}
 		},
 		1: {
-			"before": ["Talking1-1", "Talking2-1", "Request-1"],
+			"before": ["before1", "before2", "before3"],
 			"after": {
 				"after1": ["after1-1", "after1-2", "after1-3"],
-				"after2": ["after2-1", "after2-2", "after2-3"]
+				"after2": ["after2-1", "after2-2", "after2-3"],
+				"special": ["special1", "special2", "special3"]
 			}
 		},
 		2: {
 			"before": ["before1", "before2", "before3"],
 			"after": {
 				"after1": ["after1-1", "after1-2", "after1-3"],
-				"after2": ["after2-1", "after2-2", "after2-3"]
+				"after2": ["after2-1", "after2-2", "after2-3"],
+				"special": ["special1", "special2", "special3"]
 			}
 		}
 	},
@@ -70,42 +77,80 @@ var DIALOG_BANK: Dictionary = {
 			"before": ["before1", "before2", "before3"],
 			"after": {
 				"after1": ["after1-1", "after1-2", "after1-3"],
-				"after2": ["after2-1", "after2-2", "after2-3"]
+				"after2": ["after2-1", "after2-2", "after2-3"],
+				"special": ["special1", "special2", "special3"]
 			}
 		},
 		1: {
 			"before": ["before1", "before2", "before3"],
 			"after": {
 				"after1": ["after1-1", "after1-2", "after1-3"],
-				"after2": ["after2-1", "after2-2", "after2-3"]
+				"after2": ["after2-1", "after2-2", "after2-3"],
+				"special": ["special1", "special2", "special3"]
 			}
 		},
 		2: {
 			"before": ["before1", "before2", "before3"],
 			"after": {
 				"after1": ["after1-1", "after1-2", "after1-3"],
-				"after2": ["after2-1", "after2-2", "after2-3"]
+				"after2": ["after2-1", "after2-2", "after2-3"],
+				"special": ["special1", "special2", "special3"]
 			}
 		}
 	}
 }
 
-# Potion requirement mapping: EXPECTED_POTIONS[day][customer_index][potion_name] = after_key
 var EXPECTED_POTIONS: Dictionary = {
 	1: {
-		0: {"Health Potion": {"after":"after2","score":100}, "Failed Potion": {"after":"after1","score":50}},
-		1: {"Health Potion": {"after":"after2","score":100}, "Failed Potion": {"after":"after1","score":50}},
-		2: {"Health Potion": {"after":"after2","score":100}, "Failed Potion": {"after":"after1","score":50}},
+		0: {
+			"Health Potion": {"after":"after2","score":100},
+			"Failed Potion": {"after":"after1","score":50},
+			"Special Potion": {"special":"special","score":150,"unlock_customers":[1]}
+		},
+		1: {
+			"Health Potion": {"after":"after2","score":100},
+			"Failed Potion": {"after":"after1","score":50},
+			"Special Potion": {"special":"special","score":150}
+		},
+		2: {
+			"Health Potion": {"after":"after2","score":100},
+			"Failed Potion": {"after":"after1","score":50},
+			"Special Potion": {"special":"special","score":150}
+		}
 	},
 	2: {
-		0: {"Health Potion": {"after":"after2","score":100}, "Failed Potion": {"after":"after1","score":50}},
-		1: {"Health Potion": {"after":"after2","score":100}, "Failed Potion": {"after":"after1","score":50}},
-		2: {"Health Potion": {"after":"after2","score":100}, "Failed Potion": {"after":"after1","score":50}},
+		0: {
+			"Health Potion": {"after":"after2","score":100},
+			"Failed Potion": {"after":"after1","score":50},
+			"Special Potion": {"special":"special","score":150}
+		},
+		1: {
+			"Health Potion": {"after":"after2","score":100},
+			"Failed Potion": {"after":"after1","score":50},
+			"Special Potion": {"special":"special","score":150}
+		},
+		2: {
+			"Health Potion": {"after":"after2","score":100},
+			"Failed Potion": {"after":"after1","score":50},
+			"Special Potion": {"special":"special","score":150}
+		}
 	},
 	3: {
-		0: {"Health Potion": {"after":"after2","score":100}, "Failed Potion": {"after":"after1","score":50}},
-		1: {"Health Potion": {"after":"after2","score":100}, "Failed Potion": {"after":"after1","score":50}},
-		2: {"Health Potion": {"after":"after2","score":100}, "Failed Potion": {"after":"after1","score":50}},
+		0: {
+			"Health Potion": {"after":"after2","score":100},
+			"Failed Potion": {"after":"after1","score":50},
+			"Special Potion": {"special":"special","score":150}
+		},
+		1: {
+			"Health Potion": {"after":"after2","score":100},
+			"Failed Potion": {"after":"after1","score":50},
+			"Special Potion": {"special":"special","score":150}
+		},
+		2: {
+			"Health Potion": {"after":"after2","score":100},
+			"Failed Potion": {"after":"after1","score":50},
+			"Special Potion": {"special":"special","score":150}
+		}
 	}
 }
 
@@ -122,28 +167,46 @@ var _waiting: bool = false
 var _running: bool = false
 var _fade_tween: Tween = null
 
+var _unlocked_customers: Dictionary = {}
+var _seen_specials: Dictionary = {}
+
 func _ready() -> void:
 	portrait.modulate = Color(portrait.modulate.r, portrait.modulate.g, portrait.modulate.b, 0.0)
 	_update_day_label()
 	_update_score_label()
 	_start_customer_flow()
 
-# ================= External Interface =================
 func notify_potion(potion_name: String) -> void:
 	if not _waiting:
 		return
 	_waiting = false
 
-	var info: Dictionary = _resolve_after_info(_day, _idx, potion_name)  # {after_key, score}
-	var after_key: String = info["after_key"]
-	var lines: Array = _get_after_lines(_day, _idx, after_key)
+	var info: Dictionary = _resolve_after_info(_day, _idx, potion_name)
+	var lines: Array = []
+
+	if info.has("special_key") and str(info["special_key"]) != "":
+		lines = _get_special_lines(_day, _idx, str(info["special_key"]))
+	elif str(info["after_key"]) == "special":
+		lines = _get_special_lines(_day, _idx, "special")
+	else:
+		lines = _get_after_lines(_day, _idx, str(info["after_key"]))
+
+	if info.has("unlock_customers"):
+		var key = "%d:%d:%s" % [_day, _idx, potion_name]
+		if not _seen_specials.has(key):
+			_seen_specials[key] = true
+			for cust in info["unlock_customers"]:
+				var target_day = _day + 1
+				if not _unlocked_customers.has(target_day):
+					_unlocked_customers[target_day] = []
+				if cust not in _unlocked_customers[target_day]:
+					_unlocked_customers[target_day].append(cust)
+
 	await _play_lines(lines)
 
-	# Add score and update label
-	_total_score += int(info["score"])
+	_total_score += int(info.get("score", 0))
 	_update_score_label()
 
-	# Delay before switching
 	await get_tree().create_timer(transition_interval_sec).timeout
 	await _fade_out()
 	
@@ -154,7 +217,6 @@ func notify_potion(potion_name: String) -> void:
 	_clear_dialog()
 	_next_customer_or_next_day()
 
-# ================= Flow Control =================
 func _start_customer_flow() -> void:
 	if _running:
 		return
@@ -167,7 +229,13 @@ func _start_customer_flow() -> void:
 	await _fade_in()
 
 	_clear_dialog()
-	var before_lines: Array = _get_before_lines(_day, _idx)
+	var before_lines: Array = []
+
+	if _unlocked_customers.has(_day) and _idx in _unlocked_customers[_day]:
+		before_lines = _get_before_special_lines(_day, _idx)
+	else:
+		before_lines = _get_before_lines(_day, _idx)
+
 	await _play_lines(before_lines)
 
 	_waiting = true
@@ -187,12 +255,15 @@ func _update_day_label() -> void:
 	if is_instance_valid(date_label):
 		date_label.text = "Day %d" % _day
 
-# ================= Matching Logic =================
 func _resolve_after_key(day: int, idx: int, potion_name: String) -> String:
 	var day_map: Dictionary = EXPECTED_POTIONS.get(day, {})
 	var cust_map: Dictionary = day_map.get(idx, {})
 	if cust_map.has(potion_name):
-		return String(cust_map[potion_name])
+		var entry = cust_map[potion_name]
+		if typeof(entry) == TYPE_DICTIONARY:
+			return String(entry.get("after", default_after_key))
+		else:
+			return String(entry)
 	return default_after_key
 
 func _get_before_lines(day: int, idx: int) -> Array:
@@ -202,17 +273,42 @@ func _get_before_lines(day: int, idx: int) -> Array:
 		return c["before"]
 	return []
 
+func _get_before_special_lines(day: int, idx: int) -> Array:
+	var d: Dictionary = DIALOG_BANK.get(day, {})
+	var c: Dictionary = d.get(idx, {})
+	if c.has("before_special"):
+		return c["before_special"]
+	return _get_before_lines(day, idx)
+
 func _get_after_lines(day: int, idx: int, after_key: String) -> Array:
 	var d: Dictionary = DIALOG_BANK.get(day, {})
 	var c: Dictionary = d.get(idx, {})
-	if not c.has("after"):
+	if not c:
 		return []
-	var after: Dictionary = c["after"]
-	if after.has(after_key):
-		return after[after_key]
+	if c.has("after"):
+		var after: Dictionary = c["after"]
+		if after.has(after_key):
+			return after[after_key]
 	return []
 
-# ================= UI Helpers =================
+func _get_special_lines(day: int, idx: int, special_key: String) -> Array:
+	var d: Dictionary = DIALOG_BANK.get(day, {})
+	var c: Dictionary = d.get(idx, {})
+	if not c:
+		return []
+	if c.has("special") and typeof(c["special"]) == TYPE_DICTIONARY:
+		if c["special"].has(special_key):
+			return c["special"][special_key]
+	if c.has("after"):
+		var after: Dictionary = c["after"]
+		if after.has(special_key):
+			return after[special_key]
+		if after.has("special") and special_key == "special":
+			return after["special"]
+	if c.has("special") and typeof(c["special"]) == TYPE_ARRAY and special_key == "special":
+		return c["special"]
+	return []
+
 func _clear_dialog() -> void:
 	dialog_text.clear()
 	_autoscroll_deferred()
@@ -234,7 +330,6 @@ func _play_lines(lines: Array) -> void:
 		if i < lines.size() - 1:
 			await get_tree().create_timer(line_interval_sec).timeout
 
-# Parse potion mapping entries into {after_key, score}
 func _resolve_after_info(day: int, idx: int, potion_name: String) -> Dictionary:
 	var day_map: Dictionary = EXPECTED_POTIONS.get(day, {})
 	var cust_map: Dictionary = day_map.get(idx, {})
@@ -242,16 +337,17 @@ func _resolve_after_info(day: int, idx: int, potion_name: String) -> Dictionary:
 	if cust_map.has(potion_name):
 		var entry: Variant = cust_map[potion_name]
 		if typeof(entry) == TYPE_DICTIONARY:
-			var ak: String = String(entry.get("after", default_after_key))
+			var ak: String = String(entry.get("after", ""))
+			var sk: String = String(entry.get("special", ""))
 			var sc: int = int(entry.get("score", 0))
-			return {"after_key": ak, "score": sc}
+			var unlocks: Array = entry.get("unlock_customers", [])
+			var after_key_val: String = ak if ak != "" else default_after_key
+			return {"after_key": after_key_val, "special_key": sk, "score": sc, "unlock_customers": unlocks}
 		else:
-			# compatibility with old format: plain string after_key, no score
 			var ak2: String = String(entry)
-			return {"after_key": ak2, "score": 0}
+			return {"after_key": ak2, "special_key": "", "score": 0, "unlock_customers": []}
 
-	# fallback: default branch, score = 0
-	return {"after_key": default_after_key, "score": 0}
+	return {"after_key": default_after_key, "special_key": "", "score": 0, "unlock_customers": []}
 
 func _update_score_label() -> void:
 	if is_instance_valid(score_label):
