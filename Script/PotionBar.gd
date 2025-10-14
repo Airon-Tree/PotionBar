@@ -75,7 +75,7 @@ var RECIPES: Array = [
 		"base": "Oil",
 		"grind": true,
 		"distill": true,
-		"materials": { "Sage": 1, "Valerian": 1, "Warmwood": 2 },
+		"materials": { "Sage": 1, "Valerian": 1, "Warmwood": 1 },
 		"texture": null,
 		"description": "Fortifies against battle injuries - adds defensive Warmwood"
 	},
@@ -85,7 +85,7 @@ var RECIPES: Array = [
 		"base": "Oil",
 		"grind": false,  # Elder's traditional method doesn't grind
 		"distill": false,
-		"materials": { "Sage": 2, "Valerian": 2, "Comfrey": 1 },
+		"materials": { "Sage": 2, "Valerian": 1, "Comfrey": 1 },
 		"texture": null,
 		"description": "Full restorative - doubles Sage and adds Valerian for deep healing"
 	},

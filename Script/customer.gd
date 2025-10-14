@@ -27,104 +27,86 @@ var DIALOG_BANK: Dictionary = {
 	1: {
 		0: { # Village Guardian - Day 1
 			"before": [
-				"Morning! I heard you finally passed your master's trial—congrats! My job keeping the village safe totally relies on your potions.",
-				"I spotted fresh goblin footprints near the eastern ridge—deep ones, like they're carrying heavy equipment. That's never a good sign.",
-				"Tonight I'll track them to their nest while they sleep. Could you brew me a [color=yellow]Refresh Potion[/color]? If I doze off during surveillance, we could miss crucial intel.",
-				"[i](She needs to stay alert, but I wonder if there's something even more effective than a standard Refresh Potion...)[/i]"
+				"Morning! Congrats on passing your master's trial—the village relies on your potions for protection.",
+				"Fresh goblin footprints near the eastern ridge... deep ones, like they're carrying heavy equipment. Never a good sign.",
+				"I'm tracking them to their nest tonight. Could you brew me a [color=yellow]Refresh Potion[/color]? Dozing off during surveillance could cost us crucial intel.",
+				"[i](She needs to stay alert, but I wonder if there's something more effective than a standard Refresh Potion...)[/i]"
 			],
 			"after": {
 				"good": [
-					"Perfect clarity! This should keep me sharp through the night.",
-					"By the way, I saw the Elder struggling with her flour sacks earlier. Maybe check if she needs something for her joints?",
-					"And that librarian... he was studying old maps near the mill. Knowledgeable types like him often have insights we practical folks miss."
+					"Perfect clarity! This should keep me sharp.",
 				],
 				"bad": [
 					"This looks... weaker than I hoped. The sediment worries me.",
-					"Speaking of worries, the Elder mentioned her arthritis is acting up with this cold snap. She'd never ask, but she could use something warming.",
-					"The librarian might know about purification methods—he seems the scholarly type."
 				],
 				"special": [ # Energy Potion (stronger alternative)
-					"Whoa! This is more potent than a standard Refresh Potion! The energy just radiates through me!",
-					"You know, the Elder was talking about old remedies yesterday. Said some could 'clear the mind as well as the lungs.' Maybe she knows something we don't.",
-					"With this level of alertness, I should pay more attention to what the others are noticing too."
+					"Whoa! More potent than a standard Refresh Potion! Energy radiates through me!",
+					"With this alertness, I should be able pay more attention to what others aren't noticing.",
+					"The Elder was struggling with flour sacks earlier—her health has been declining and the weather is not helping. Old John sometimes added [color=orange]extra Valerian[/color] for harsh seasons.",
 				]
 			}
 		},
 		1: { # Village Elder - Day 1
 			"before": {
 				"default": [
-					"Ah, good day to you, dear. May the gods watch over your path.",
-					"Our young guardian rushed by earlier—all business, that one. When I was her age, we dealt with threats using more than just brute force.",
-					"This autumn chill settles deep in old bones. A simple [color=yellow]Flu Potion[/color] would be most welcome, though Old John sometimes added [color=orange]extra Sage[/color] for particularly harsh seasons.",
-					"[i](She seems to be hinting that standard recipes can be enhanced for better results...)[/i]"
+					"Good day, dear. May the gods watch over your path.",
+					"Our guardian rushed by earlier—all business. When I was her age, we used more than brute force.",
+					"In my day, we enhanced simple traps with... [color=orange]lethal elements[/color].",
+					"This autumn chill settles deep. A [color=yellow]Flu Potion[/color] would help"
 				],
 				"guardian_good": [
-					"I saw our guardian heading out with purpose. Your potion must have given her confidence.",
-					"She stopped to help me with my market basket—good heart under all that armor. Sometimes the strongest protection comes from clever thinking, not strong arms.",
-					"A [color=yellow]Flu Potion[/color] for my aches, but my mind wanders to the stories our librarian friend might preserve about days like these.",
-					"[i](She's connecting different types of knowledge—maybe there's wisdom in combining approaches?)[/i]"
+					"Our guardian headed out with purpose. Your potion must have given her confidence.",
+					"This autumn chill settles deep. A [color=yellow]Flu Potion[/color] would help"
 				],
 				"guardian_bad": [
-					"Child, the guardian looked uneasy. I offered her some of my honey biscuits—comfort food helps steady nerves.",
-					"She mentioned the librarian was studying old battle tactics. You know, in my day, we'd sometimes enhance simple traps with... [color=orange]stronger persuasions[/color].",
-					"My [color=yellow]Flu Potion[/color] can wait—if she fails her scout, we'll need remedies that do more than just warm old bones.",
-					"[i](She's suggesting we might need more aggressive solutions than standard potions...)[/i]"
+					"Child, the guardian looked uneasy. I offered honey biscuits—comfort food steadies nerves.",
+					"This autumn chill settles deep. A [color=yellow]Flu Potion[/color] would help, though Old John sometimes added [color=orange]extra Valerian[/color] for harsh seasons.",
+					"Though if the guardian fails her scout, we'll need more than warm bones.",
 				]
 			},
 			"after": {
 				"good": [
-					"Excellent work! The balance of warmth and clarity is perfect.",
-					"You should share your technique with the librarian—he's always seeking 'living knowledge' as he calls it.",
-					"And tell our guardian that old bones still remember things—sometimes the right mixture at the right time saves more than any sword swing."
+					"Excellent work! Perfect balance of warmth and clarity.",
+					"Tell our guardian that old bones remember—the right mixture saves more than any sword swing."
 				],
 				"bad": [
-					"The color is off, but the effort is appreciated.",
-					"Don't be discouraged. Even the librarian's precious books contain failed experiments that led to great discoveries.",
-					"Sometimes the simplest solutions work best—like proper trap placement with the right... enhancements."
+					"The color is off, but appreciated.",
+					"Don't be discouraged. Even the librarian's books contain failed experiments that led to discoveries.",
 				],
 				"special": [ # Cure Potion (enhanced flu treatment)
-					"Blessed stars! This has the golden hue of Old John's master recipes! The extra Valerian makes all the difference!",
-					"This isn't just a Flu Potion—it's a proper restorative! The librarian must record this innovation!",
-					"Our guardian would appreciate how thinking beyond the obvious can lead to remarkable results."
+					"Blessed stars! This has the golden hue of Old John's master recipes! The extra Valerian makes all the difference! Old John also mentioned adding [color=orange]extra Poppy and Warmwood[/color] to his Health potions creates remarkable results.",
+					"Our guardian would appreciate thinking beyond the obvious."
 				]
 			}
 		},
 		2: { # Traveling Librarian - Day 1
 			"before": {
 				"default": [
-					"Ah, so this is Old John's successor. Your master understood that the best potions serve multiple purposes.",
-					"The Elder was telling me fascinating folk remedies this morning. She mentioned some potions can be 'adapted for modern needs' with the right adjustments.",
-					"A standard [color=yellow]Health Potion[/color] would suffice, though I've read accounts where adding [color=orange]extra Warmwood[/color] created remarkable resilience.",
-					"[i](He's directly suggesting an enhancement to the standard Health Potion formula...)[/i]"
+					"Ah, Old John's successor. Your master understood that best potions serve multiple purposes.",
+					"I'm currently behind on some manuscripts, a [color=yellow]Refresh Potion[/color] would suffice",
 				],
 				"elder_mentioned": [
-					"The Elder's stories about past conflicts match patterns in my oldest texts. She mentioned 'creative solutions' being as important as strong ones.",
-					"Historical records show that the most successful alchemists understand intent over instruction. They brew what's needed, not just what's asked.",
-					"A robust [color=yellow]Health Potion[/color]—one that could handle more than simple scrapes if your insight suggests [color=orange]enhancements[/color].",
-					"[i](He's encouraging you to think beyond the basic request...)[/i]"
+					"The Elder's stories match my oldest texts. She mentioned 'creative solutions' being crucial.",
+					"Historical records show successful alchemists understand intent over instruction. Brew what's needed, not just asked.",
+					"Brew something strong. Old texts speak of potions that do more than heal—they [color=orange]fortify[/color].",
 				],
 				"guardian_danger": [
-					"The guardian's tension is palpable. Single defenders against hordes rarely end well in the histories.",
-					"The Elder has the right idea—sometimes prevention beats confrontation. A properly enhanced potion can deter where force fails.",
-					"Brew something strong. The old texts speak of potions that do more than heal—they [color=orange]fortify[/color].",
-					"[i](He's clearly suggesting you should enhance the Health Potion for defensive capabilities...)[/i]"
+					"The guardian's tension is palpable. Single defenders rarely fare well in histories.",
+					"The Elder has the right idea—prevention beats confrontation. Enhanced potions deter where force fails.",
 				]
 			},
 			"after": {
 				"good": [
-					"Remarkable craftsmanship! The viscosity suggests excellent ingredient integration.",
-					"The Elder would appreciate how you've balanced the traditional with the practical.",
-					"Our guardian could benefit from understanding that sometimes the best defense is a well-brewed offense."
+					"Remarkable craftsmanship! Viscosity suggests excellent integration.",
 				],
 				"bad": [
-					"The separation concerns me, but the intent is clear.",
-					"Even the Elder's famous recipes evolved through experimentation. Each attempt teaches something.",
-					"Don't limit yourself to standard formulas. The greatest discoveries come from understanding what a situation truly needs."
+					"The separation concerns me, but intent is clear.",
+					"Even the Elder's recipes evolved through experimentation. Each attempt teaches.",
+					"Don't limit to standard formulas. Greatest discoveries understand true needs."
 				],
 				"special": [ # Strong Potion (enhanced health)
-					"Astounding! You've created something beyond a simple Health Potion! The extra Warmwood creates remarkable fortification!",
-					"This matches descriptions of ancient guardian elixirs! The Elder would recognize this as proper 'battle-ready' brewing!",
-					"With innovation like this, you could create potions that serve multiple strategic purposes!"
+					"Astounding! Beyond a simple Health Potion! The extra Warmwood creates remarkable fortification!",
+					"With this innovation, you could create multi-purpose potions!"
 				]
 			}
 		}
@@ -132,84 +114,230 @@ var DIALOG_BANK: Dictionary = {
 	2: {
 		0: { # Village Guardian - Day 2
 			"before": {
+				"default": [
+					"The goblin nest is larger than expected—they're organized, not just scavengers.",
+					"I need to set perimeter traps before nightfall. A [color=yellow]Refresh Potion[/color] for the long watch ahead.",
+				],
 				"good": [
-					"Your potion worked perfectly! I found their main cave... and it's worse than we imagined.",
-					"The Elder was right about the eastern ridge—her knowledge of the land saved me hours of searching.",
-					"And that librarian... his maps showed cave systems I didn't know existed. He mentioned something about '[color=orange]area denial[/color]' strategies from old texts.",
-					"I'm setting trap lines tonight—I need another [color=yellow]Refresh Potion[/color] to maintain watch, unless you have any... [color=orange]creative ideas[/color] for dealing with groups.",
-					"[i](She's openly asking for alternative approaches beyond simple alertness...)[/i]"
+					"Your potion worked! Found their main cave... the situation is worse than imagined.",
+					"The Elder was right about the eastern ridge—her knowledge saved me hours.",
+					"Setting trap lines tonight—need another [color=yellow]Refresh Potion[/color], unless you have... [color=orange]creative ideas[/color] for groups.",
 				],
 				"bad": [
-					"I barely made it back. Dozed off for a moment and they nearly caught me.",
-					"The Elder noticed my limp and gave me a poultice from her garden. She muttered something about 'needing more than watchfulness'.",
-					"The librarian's texts mentioned goblin adaptability. Maybe we need to adapt our approach too.",
-					"I'm rigging every trap I know, but I need something more reliable this time. Maybe something that [color=orange]works while I sleep[/color]?",
-					"[i](She's desperate for a solution that doesn't rely solely on her vigilance...)[/i]"
+					"Barely made it back. Dozed off and they nearly caught me.",
+					"The Elder noticed my limp—gave me a garden poultice.",
 				],
 				"elder_warned": [
-					"The Elder got me thinking... she mentioned old methods where traps did more than just catch.",
-					"Turns out the librarian has scrolls about '[color=orange]persuasive defenses[/color].' Between her memory and his books, they're onto something.",
-					"I still need surveillance capability, but I'm definitely open to... [color=orange]enhanced solutions[/color] for the traps themselves.",
-					"[i](She's directly hinting at using poison on her traps as an alternative strategy...)[/i]"
+					"The Elder got me thinking... old methods where traps did more than catch.",
 				]
 			},
 			"after": {
 				"good": [
-					"Solid work! This should keep me alert through the night watch.",
-					"I'll check with the Elder about the best placements—she knows these woods better than anyone.",
-					"And maybe the librarian has something about behavioral patterns. His historical perspective is surprisingly practical."
+					"Solid work! Should keep me alert through night watch.",
+					"I'll check with the Elder about placements—she knows these woods best.",
+					"Maybe the librarian has behavioral patterns. Historical perspective is practical."
 				],
 				"bad": [
-					"It'll have to do. I'll just have to check the traps more frequently.",
-					"The Elder's poultice is helping my leg at least. Different kinds of healing, I suppose.",
+					"It'll have to do. Just check traps more frequently.",
+					"The Elder's poultice helps my leg. Different healings, I suppose.",
 					"See you at dawn... hopefully."
 				],
 				"special": [ # Poison Potion
-					"You brilliant alchemist! This is exactly what the Elder and librarian were hinting at!",
-					"Poison on the traps means they'll neutralize themselves! No more all-night watches!",
-					"This is the kind of strategic thinking that wins campaigns! Between your potions, the Elder's wisdom, and the librarian's knowledge, we might just survive this!"
+					"Brilliant! Exactly what they hinted at!",
+					"Poison on traps means they neutralize themselves! No more all-night watches!",
+					"This strategic thinking wins campaigns! Between your potions, Elder's wisdom, and librarian's knowledge, we might survive!"
 				]
 			}
 		},
 		1: { # Village Elder - Day 2
 			"before": {
+				"default": [
+					"The wind carries troubling sounds from the eastern ridge tonight.",
+					"Our guardian prepares for another dangerous night. She carries too much weight for one pair of shoulders.",
+					"An [color=yellow]Energy Potion[/color] would help me prepare supplies for whatever dawn may bring.",
+				],
 				"guardian_good": [
-					"The guardian actually smiled this morning! Your potions are working miracles.",
-					"She asked me about the old ways of enhancing simple defenses. Young people rediscovering old wisdom warms my heart.",
-					"The librarian has been helping her understand that knowledge can be a weapon too. Strange friendship, but good for both.",
-					"An [color=yellow]Energy Potion[/color] for the baking, though if you feel inspired to enhance it with [color=orange]extra Comfrey[/color], I wouldn't say no.",
-					"[i](She's specifically mentioning an ingredient that could enhance the Energy Potion...)[/i]"
+					"The guardian smiled! Your potions work miracles.",
+					"She asked about enhancing defenses. Youth rediscovering wisdom warms my heart.",
+					"An [color=yellow]Energy Potion[/color] for baking, though enhanced with [color=orange]extra Comfrey[/color] would be welcome.",
 				],
 				"guardian_struggling": [
-					"Oh child, the shadows under her eyes tell the whole story.",
-					"I've been teaching her that sometimes the best strength comes from cleverness, not muscle.",
-					"The librarian found accounts where simple potions, properly enhanced, turned the tide of entire skirmishes.",
-					"An [color=yellow]Energy Potion[/color]—and if your insight suggests something [color=orange]more potent[/color], I trust your judgment.",
-					"[i](She's explicitly giving you permission to enhance beyond the basic request...)[/i]"
-				],
-				"default": [
-					"The millstone turns regardless of goblins or gods.",
-					"Our guardian was asking about strategic thinking. She's learning that battles are won with minds as well as swords.",
-					"The librarian says my folk wisdom matches chemical principles. Funny how different kinds of knowledge converge.",
-					"An [color=yellow]Energy Potion[/color] would help, though Old John sometimes made a version with [color=orange]extra Poppy[/color] that could fuel an entire day's work.",
-					"[i](She's sharing specific enhancement knowledge from your master...)[/i]"
+					"Oh child, the shadows under her eyes tell the story.",
+					"Teaching her that best strength comes from cleverness, not muscle.",
+					"Librarian found accounts where enhanced potions turned skirmishes.",
+					"An [color=yellow]Energy Potion[/color]—and if insight suggests something [color=orange]more potent[/color], I trust you.",
 				]
 			},
 			"after": {
 				"good": [
-					"Ah, the warmth spreads just right! You've mastered the balance.",
-					"I'll bake extra honey biscuits—the guardian has developed quite a taste for them.",
-					"The librarian asked for the recipe. Says collaboration between practical and scholarly wisdom creates the best results."
+					"Ah, warmth spreads just right! Mastered the balance.",
+					"I'll bake extra honey biscuits—guardian developed a taste.",
+					"Librarian asked for recipe. Says collaboration creates best results."
 				],
 				"bad": [
-					"The aftertaste is bitter, much like our prospects.",
-					"Still, the guardian says even imperfect tools can save lives if used with wisdom.",
-					"The librarian would say every attempt advances understanding. I say sometimes you need to trust your instincts about what's truly needed."
+					"Bitter aftertaste, like our prospects.",
+					"Still, guardian says imperfect tools save lives with wisdom.",
+					"Librarian would say every attempt advances understanding. Trust instincts about needs."
 				],
 				"special": [ # Refresh Potion (enhanced energy)
-					"By the eternal flame! This isn't just energy—it's pure vitality! The extra Poppy makes all the difference!",
-					"This could power the morning watch and the evening baking! The guardian should try this for endurance!",
-					"You're not just following recipes—you're understanding what each situation truly requires!"
+					"By the eternal flame! Not just energy—pure vitality! Extra Poppy makes difference!",
+					"This could power watch and baking! Guardian should try for endurance!",
+					"You're not just following recipes—understanding true requirements!"
+				]
+			}
+		},
+		2: { # Traveling Librarian - Day 2
+			"before": {
+				"default": [
+					"My research uncovered troubling patterns. These goblins exhibit tactical behavior unseen in local breeds.",
+					"The guardian's reports match ancient texts describing organized incursions rather than random raids.",
+					"A [color=yellow]Health Potion[/color] would be prudent—these manuscripts won't transcribe themselves.",
+				],
+				"guardian_success": [
+					"The guardian's success proves historical tactics still apply. She's adapting well.",
+					"My scrolls mention potions that could turn the tide if properly enhanced.",
+					"A [color=yellow]Health Potion[/color], though the old texts suggest [color=orange]fortified versions[/color] for times of conflict.",
+				],
+				"guardian_struggle": [
+					"The guardian's difficulties mirror accounts of underestimated threats.",
+					"Historical records show that conventional methods often fail against organized foes.",
+					"We need solutions beyond standard potions. Something that [color=orange]changes the battlefield[/color].",
+				],
+				"collaboration": [
+					"The Elder's wisdom combined with my research reveals promising strategies.",
+					"Ancient alchemists often brewed for specific threats, not general needs.",
+					"Consider what this situation truly requires, not just what's traditionally asked.",
+				]
+			},
+			"after": {
+				"good": [
+					"Adequate preparation. The consistency suggests careful work.",
+					"Remember, the greatest alchemists adapted their craft to the needs of their time.",
+					"Between us, we might yet preserve both knowledge and lives."
+				],
+				"bad": [
+					"Imperfect, but serviceable. Even failed mixtures teach valuable lessons.",
+					"The Elder would say every attempt brings us closer to understanding.",
+					"Don't be constrained by tradition when innovation is needed."
+				],
+				"special": [ # Strong Potion (enhanced health)
+					"Remarkable! This matches descriptions of ancient battle elixirs!",
+					"The extra Warmwood creates exactly the fortification described in tactical manuscripts!",
+					"With potions like this, we stand a real chance against what's coming!"
+				]
+			}
+		}
+	},
+	3: {
+		0: { # Village Guardian - Day 3
+			"before": {
+				"default": [
+					"This is it—they're massing for an attack. Tonight decides everything.",
+					"The traps are set, but we need every advantage. I need a [color=yellow]Strong Potion[/color] for the fight ahead.",
+				],
+				"good": [
+					"Your support has been crucial. We've identified their command group.",
+					"The Elder's wisdom about trap placement saved us twice already.",
+					"A [color=yellow]Strong Potion[/color] for the final push—this ends tonight, one way or another.",
+				],
+				"bad": [
+					"We're stretched thin. The poultices help, but we need proper healing.",
+					"The librarian's maps showed weak points in their formation.",
+					"A [color=yellow]Strong Potion[/color] might give us the edge we desperately need.",
+				],
+				"special": [
+					"Between the Elder's strategies and the librarian's research, we've turned this around.",
+					"Your enhanced potions have made all the difference in our preparations.",
+					"One last [color=yellow]Strong Potion[/color] to finish this—we can actually win this.",
+				]
+			},
+			"after": {
+				"good": [
+					"Solid and reliable. Exactly what I need for tonight.",
+					"Thank you for everything. The village is lucky to have you.",
+					"With this, I can face whatever comes through those trees."
+				],
+				"bad": [
+					"It'll have to do. We've come too far to turn back now.",
+					"Remember what we've learned—sometimes cleverness beats strength.",
+					"Watch for my signal fire tonight. Pray it burns bright."
+				],
+				"special": [ # Energy Potion (enhanced strong)
+					"Incredible! This feels like liquid courage!",
+					"With this coursing through me, I could take on their entire war band!",
+					"Your master would be proud. You haven't just followed recipes—you've understood what we needed!"
+				]
+			}
+		},
+		1: { # Village Elder - Day 3
+			"before": {
+				"default": [
+					"The air tastes of iron and anticipation. Battle comes tonight.",
+					"Our guardian prepares to face what we've long feared.",
+					"A [color=yellow]Health Potion[/color] for her—she'll need all the strength we can give.",
+				],
+				"guardian_confident": [
+					"She stands ready, your potions having fortified her well.",
+					"The old ways and new knowledge have merged beautifully.",
+					"A [color=yellow]Health Potion[/color] for our protector—make it count.",
+				],
+				"guardian_worried": [
+					"She carries the weight of us all. I see the doubt in her eyes.",
+					"We must give her every advantage we can muster.",
+					"A [color=yellow]Health Potion[/color], and pray it's enough to tip the scales.",
+				]
+			},
+			"after": {
+				"good": [
+					"Well crafted. This should sustain her through the night.",
+					"You've grown beyond your master's teachings, child. He would be proud.",
+					"Whatever happens tonight, know you've given us our best chance."
+				],
+				"bad": [
+					"It will have to serve. We work with what we have.",
+					"Sometimes the will to survive matters more than the tools we wield.",
+					"Keep watch tonight. Your skills may yet be needed again."
+				],
+				"special": [ # Cure Potion (enhanced health)
+					"Gods above! This is restoration magic made liquid!",
+					"With this, she could survive wounds that would kill a normal warrior!",
+					"You haven't just made a potion—you've given us hope!"
+				]
+			}
+		},
+		2: { # Traveling Librarian - Day 3
+			"before": {
+				"default": [
+					"History records moments like these—where everything balances on a knife's edge.",
+					"My research suggests this night will be remembered, one way or another.",
+					"A [color=yellow]Cure Potion[/color] for the aftermath. Hope for the best, prepare for the worst.",
+				],
+				"elder_concerned": [
+					"The Elder's premonitions match ancient omens. She feels the turning point approaching.",
+					"Your collaboration has created something new—a fusion of wisdom and craft.",
+					"A [color=yellow]Cure Potion[/color] for what comes next. Dawn will tell our story.",
+				],
+				"final_preparations": [
+					"All the pieces are in place. Your innovations have changed everything.",
+					"This will be recorded as either our finest hour or our final stand.",
+					"One last [color=yellow]Cure Potion[/color]—for healing, for hope, for whatever comes after.",
+				]
+			},
+			"after": {
+				"good": [
+					"Properly balanced. It will serve its purpose well.",
+					"Whatever happens tonight, your contributions have been invaluable.",
+					"Future generations will study this moment. I'll ensure they know your role."
+				],
+				"bad": [
+					"Adequate, given the circumstances. We make do.",
+					"Remember, even imperfect efforts can change history.",
+					"The records will show we tried. That matters."
+				],
+				"special": [ # Flu Potion (enhanced cure)
+					"Astounding! This transcends mere healing—it's revitalization!",
+					"You've created something that could redefine post-battle recovery!",
+					"With potions like this, we could rebuild better than before! This is legacy work!"
 				]
 			}
 		}
@@ -228,10 +356,10 @@ var EXPECTED_POTIONS: Dictionary = {
 			#"Failed Potion": {"after":"bad","score":50},
 			"Cure Potion": {"after":"special","score":150}  # Enhanced alternative
 		},
-		2: { # Librarian wants Health Potion
-			"Health Potion": {"after":"good","score":100},
+		2: { # Librarian wants Refresh Potion
+			"Refresh Potion": {"after":"good","score":100},
 			#"Failed Potion": {"after":"bad","score":50},
-			"Strong Potion": {"after":"special","score":150}  # Enhanced alternative
+			"Energy Potion": {"after":"special","score":150}  # Enhanced alternative
 		}
 	},
 	2: {
@@ -458,9 +586,6 @@ func _resolve_after_key(day: int, idx: int, potion_name: String) -> String:
 		return String(cust_map[potion_name])
 	return default_after_key
 
-
-
-
 func _get_before_lines(day: int, idx: int) -> Array:
 	var d: Dictionary = DIALOG_BANK.get(day, {})
 	var c: Dictionary = d.get(idx, {})
@@ -476,75 +601,83 @@ func _get_before_lines(day: int, idx: int) -> Array:
 	
 	# Handle dictionary case (contextual dialogue)
 	if typeof(before_data) == TYPE_DICTIONARY:
+		var default_lines: Array = before_data.get("default", ["What can you brew for me today?"])
+		var additional_lines: Array = []
+		
 		# Determine which contextual dialogue to use based on previous outcomes
 		match idx:
 			0: # Guardian
 				if day == 2:
 					# Day 2 Guardian - check if Elder gave strategic advice
 					if _customer_states["elder"]["shared_strategic_wisdom"]:
-						return before_data.get("elder_warned", before_data.get("default", ["I need a potion for my mission."]))
-					# Check previous potion quality
-					var prev_quality = _customer_states["guardian"]["last_potion_quality"]
-					if prev_quality == "good":
-						return before_data.get("good", before_data.get("default", ["The scouting went well."]))
-					elif prev_quality == "bad":
-						return before_data.get("bad", before_data.get("default", ["I had some trouble..."]))
+						additional_lines = before_data.get("elder_warned", [])
+					else:
+						# Check previous potion quality
+						var prev_quality = _customer_states["guardian"]["last_potion_quality"]
+						if prev_quality == "good":
+							additional_lines = before_data.get("good", [])
+						elif prev_quality == "bad":
+							additional_lines = before_data.get("bad", [])
 				elif day == 3:
 					# Day 3 Guardian - check if special strategies were used
 					if _customer_states["guardian"]["used_special_strategy"]:
-						return before_data.get("special", before_data.get("default", ["Ready for the final push."]))
-					var prev_quality = _customer_states["guardian"]["last_potion_quality"]
-					if prev_quality == "good":
-						return before_data.get("good", before_data.get("default", ["We're making progress."]))
-					elif prev_quality == "bad":
-						return before_data.get("bad", before_data.get("default", ["We need to finish this."]))
+						additional_lines = before_data.get("special", [])
+					else:
+						var prev_quality = _customer_states["guardian"]["last_potion_quality"]
+						if prev_quality == "good":
+							additional_lines = before_data.get("good", [])
+						elif prev_quality == "bad":
+							additional_lines = before_data.get("bad", [])
 				
 			1: # Elder
 				if day == 1:
 					# Day 1 Elder - check guardian's initial state
 					if _customer_states["guardian"]["last_potion_quality"] == "good":
-						return before_data.get("guardian_good", before_data.get("default", ["Good day, dear."]))
+						additional_lines = before_data.get("guardian_good", [])
 					elif _customer_states["guardian"]["last_potion_quality"] == "bad":
-						return before_data.get("guardian_bad", before_data.get("default", ["I'm concerned..."]))
+						additional_lines = before_data.get("guardian_bad", [])
 				elif day == 2:
 					# Day 2 Elder - check guardian's progress and librarian's involvement
 					if _customer_states["guardian"]["last_potion_quality"] == "good":
-						return before_data.get("guardian_good", before_data.get("default", ["Our guardian seems well."]))
+						additional_lines = before_data.get("guardian_good", [])
 					elif _customer_states["guardian"]["last_potion_quality"] == "bad":
-						return before_data.get("guardian_struggling", before_data.get("default", ["Our guardian needs support."]))
+						additional_lines = before_data.get("guardian_struggling", [])
 					elif _customer_states["librarian"]["researching_strategies"]:
-						return before_data.get("default", ["The librarian has interesting ideas..."])
+						additional_lines = before_data.get("librarian_collaboration", [])
 				elif day == 3:
 					# Day 3 Elder - final preparations
 					if _customer_states["guardian"]["last_potion_quality"] == "good":
-						return before_data.get("guardian_confident", before_data.get("default", ["She looks ready."]))
+						additional_lines = before_data.get("guardian_confident", [])
 					elif _customer_states["guardian"]["last_potion_quality"] == "bad":
-						return before_data.get("guardian_worried", before_data.get("default", ["I worry for her."]))
+						additional_lines = before_data.get("guardian_worried", [])
 				
 			2: # Librarian
 				if day == 1:
 					# Day 1 Librarian - initial observations
 					if _customer_states["elder"]["shared_wisdom"]:
-						return before_data.get("elder_mentioned", before_data.get("default", ["The Elder has wisdom..."]))
+						additional_lines = before_data.get("elder_mentioned", [])
 					elif _customer_states["guardian"]["needs_help"]:
-						return before_data.get("guardian_danger", before_data.get("default", ["The situation concerns me..."]))
+						additional_lines = before_data.get("guardian_danger", [])
 				elif day == 2:
 					# Day 2 Librarian - ongoing research
 					if _customer_states["guardian"]["last_potion_quality"] == "good":
-						return before_data.get("guardian_success", before_data.get("default", ["Progress is being made."]))
+						additional_lines = before_data.get("guardian_success", [])
 					elif _customer_states["guardian"]["last_potion_quality"] == "bad":
-						return before_data.get("guardian_struggle", before_data.get("default", ["The challenges continue."]))
+						additional_lines = before_data.get("guardian_struggle", [])
 					elif _customer_states["elder"]["shared_strategic_wisdom"]:
-						return before_data.get("default", ["Collaboration shows promise..."])
+						additional_lines = before_data.get("collaboration", [])
 				elif day == 3:
 					# Day 3 Librarian - final analysis
 					if _customer_states["elder"]["actively_supporting"]:
-						return before_data.get("elder_concerned", before_data.get("default", ["The community prepares..."]))
+						additional_lines = before_data.get("elder_concerned", [])
 					elif _customer_states["guardian"]["used_special_strategy"]:
-						return before_data.get("final_preparations", before_data.get("default", ["The moment approaches..."]))
+						additional_lines = before_data.get("final_preparations", [])
 		
-		# Fallback to default dialogue for current day
-		return before_data.get("default", ["What can you brew for me today?"])
+		# Always return default lines, with additional context lines appended
+		if additional_lines.size() > 0:
+			return default_lines + additional_lines
+		else:
+			return default_lines
 	
 	# Final fallback
 	return ["I need your help with a potion."]
