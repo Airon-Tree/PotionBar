@@ -38,67 +38,77 @@ signal potion_made(potion_name: String)
 @onready var potions_shelf := $MarginContainer/VBoxContainer/PotionsShelf
 # Each recipe: name, base, grind, distill, materials{name->count}, texture
 var RECIPES: Array = [
+	# BASIC POTIONS
 	{
 		"name": "Health Potion",
 		"base": "Water",
 		"grind": true,
 		"distill": false,
-		"materials": { "Sage": 2, "Valerian": 1, "Warmwood": 1 },
-		"texture": null  # filled in _ready from tex_health_potion
-	},
-	# Add more recipes here later...
-	{
-		"name": "Strong Potion",
-		"base": "Oil",
-		"grind": true,
-		"distill": true,
-		"materials": { "Sage": 1, "Warmwood": 2 },
-		"texture": null
+		"materials": { "Sage": 2, "Valerian": 1 },
+		"texture": null,
+		"description": "Basic healing for minor injuries"
 	},
 	
 	{
-		"name": "Energy Potion",
-		"base": "Wine",
-		"grind": true,
-		"distill": false,
-		"materials": { "Comfrey": 1, "Poppy": 1, "Warmwood": 2 },
-		"texture": null
-	},
-	
-	{
-		"name": "Cure Potion",
+		"name": "Flu Potion", 
 		"base": "Water",
-		"grind": false,
-		"distill": false,
-		"materials": { "Sage": 1, "Valerian": 1, "Warmwood": 1 },
-		"texture": null
-	},
-	
-	{
-		"name": "Posion",
-		"base": "Wine",
-		"grind": true,
-		"distill": true,
-		"materials": { "Comfrey": 2, "Poppy": 2 },
-		"texture": null
-	},
-	
-	{
-		"name": "Flu Potion",
-		"base": "Oil",
 		"grind": true,
 		"distill": false,
-		"materials": { "Comfrey": 1, "Poppy": 1, "Sage": 1, "Warmwood": 1 },
-		"texture": null
+		"materials": { "Sage": 2, "Comfrey": 1 },
+		"texture": null,
+		"description": "Relieves cold symptoms and joint pain"
 	},
 	
 	{
 		"name": "Refresh Potion",
-		"base": "Water",
+		"base": "Water", 
+		"grind": true,
+		"distill": false,
+		"materials": { "Comfrey": 2, "Poppy": 1 },
+		"texture": null,
+		"description": "Maintains alertness during long watches"
+	},
+	
+	# ENHANCED ALTERNATIVES (mentioned in dialogue)
+	{
+		"name": "Strong Potion",  # Enhanced Health Potion (Librarian hint: "extra Warmwood")
+		"base": "Oil",
 		"grind": true,
 		"distill": true,
-		"materials": { "Comfrey": 1, "Poppy": 1, "Sage": 1 },
-		"texture": null
+		"materials": { "Sage": 1, "Valerian": 1, "Warmwood": 2 },
+		"texture": null,
+		"description": "Fortifies against battle injuries - adds defensive Warmwood"
+	},
+	
+	{
+		"name": "Cure Potion",  # Enhanced Flu Potion (Elder hint: "extra Sage + Valerian")  
+		"base": "Oil",
+		"grind": false,  # Elder's traditional method doesn't grind
+		"distill": false,
+		"materials": { "Sage": 2, "Valerian": 2, "Comfrey": 1 },
+		"texture": null,
+		"description": "Full restorative - doubles Sage and adds Valerian for deep healing"
+	},
+	
+	{
+		"name": "Energy Potion",  # Enhanced Refresh Potion (Elder hint: "extra Comfrey + Poppy")
+		"base": "Wine",
+		"grind": true,
+		"distill": false,
+		"materials": { "Comfrey": 2, "Poppy": 2, "Warmwood": 1 },
+		"texture": null,
+		"description": "Radiant vitality - enhanced Comfrey/Poppy with sustaining Warmwood"
+	},
+	
+	# STRATEGIC ALTERNATIVE (Guardian Day 2 request)
+	{
+		"name": "Poison",  # Area denial strategy (Librarian + Elder hints)
+		"base": "Wine",
+		"grind": true,
+		"distill": true,  # Requires careful distillation
+		"materials": { "Comfrey": 3, "Poppy": 1 },  # Heavy Comfrey for toxicity
+		"texture": null,
+		"description": "For trap enhancement - concentrated Comfrey induces paralysis"
 	},
 ]
 
